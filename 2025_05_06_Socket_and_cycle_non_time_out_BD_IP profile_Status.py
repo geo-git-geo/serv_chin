@@ -3,7 +3,7 @@ import socket
 import datetime
 import sqlite3
 import time
-
+db_path='C:\\Users\\admin\\test_01.db'
 
 
 try: # ця обробка для можливості зупинки програми через клавітуру
@@ -70,7 +70,7 @@ try: # ця обробка для можливості зупинки прогр
             content_ask_profile_1_period_block_continue=b'\xFF\x09\x0C'
             content_ask_profile_1_period_block_end=b'\xFF\x01\x00'
             content_answer_first_ask=b'\x00\x01\x00\x01\x00\x11\x00+a)\xa1\t\x06\x07`\x85t\x05\x08\x01\x01\xa2\x03\x02\x01\x00\xa3\x05\xa1\x03\x02\x01\x00\xbe\x10\x04\x0e\x08\x00\x06_\x1f\x04\x00\x00\x1a\x1d\x00\xf3\x00\x07'
-            conn = sqlite3.connect('test_01.db')
+            #conn = sqlite3.connect('db_path')
             try:
                 client_socket.settimeout(30)# Обмежуємо час очікування даних після підключення     
                 data_1=client_socket.recv(1024)
@@ -219,7 +219,7 @@ try: # ця обробка для можливості зупинки прогр
                         count_cicle+=1
                     else:
                         count_cicle+=1
-            conn = sqlite3.connect('test_01.db')
+            conn = sqlite3.connect(db_path)
             curs = conn.cursor()
             now=str(datetime.datetime.now())
             try:
@@ -231,7 +231,7 @@ try: # ця обробка для можливості зупинки прогр
             conn.commit()
             curs.close()
             conn.close()
-            conn = sqlite3.connect('test_01.db')
+            conn = sqlite3.connect(db_path)
             curs = conn.cursor()
             # Виконання запиту пошуку останього даних                     
             curs.execute('''                                        
@@ -379,7 +379,7 @@ try: # ця обробка для можливості зупинки прогр
                     print(f'{year_1}:{mounth_1}:{day_1}\t {hour_1}:{minute_1:02d}:{secunde_1:02d}\t {bias_1}\t {status_1}t {number_metr} \t all_import_active_energy : {all_import_active_energy_1}\t all_export_active_energy : {all_export_active_energy_1}\t all_import_reactive_energy : {all_import_reactive_energy_1}\t all_export_reactive_energy : {all_export_reactive_energy_1}')
                     data_info=f"{year_1}:{mounth_1:02d}:{day_1:02d}"
                     time_info=f"{hour_1:02d}:{minute_1:02d}:{secunde_1:02d}"
-                    conn = sqlite3.connect('test_01.db')
+                    conn = sqlite3.connect(db_path)
                     curs = conn.cursor()
                     now=str(datetime.datetime.now())
                     try:
